@@ -1,4 +1,4 @@
-﻿name: Generate PEM
+﻿name: Generate PEPK ZIP
 on:
   workflow_dispatch:
 
@@ -12,11 +12,12 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: '21'
-    - name: Generate PEM
+    - name: Generate Output ZIP
       run: |
-        keytool -export -rfc -keystore android/block-burst-release.keystore -alias block-burst -file upload_certificate.pem -storepass BlockBurst2026
+        wget https://www.gstatic.com/play-apps-publisher-rapid/pepk/pepk.jar
+        java -jar pepk.jar --keystore=android/block-burst-release.keystore --alias=block-burst --output=output.zip --include-cert --rsa-aes-encryption --encryption-key-path=android/encryption_public_key.pem --keystore-pass=pass:BlockBurst2026 --key-pass=pass:BlockBurst2026
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: pem
-        path: upload_certificate.pem
+        name: outputzip
+        path: output.zip
