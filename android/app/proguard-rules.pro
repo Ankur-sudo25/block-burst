@@ -1,6 +1,6 @@
 # Capacitor & WebView rules
 -keep class com.getcapacitor.** { *; }
--keep class com.devlance.blockblast.** { *; }
+-keep class com.devlancestudio.blockburst.** { *; }
 -keepclassmembers class * {
     @android.webkit.JavascriptInterface <methods>;
 }
