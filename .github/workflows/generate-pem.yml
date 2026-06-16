@@ -1,0 +1,22 @@
+﻿name: Generate PEM
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '21'
+    - name: Generate PEM
+      run: |
+        keytool -export -rfc -keystore android/block-burst-release.keystore -alias block-burst -file upload_certificate.pem -storepass BlockBurst2026
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: pem
+        path: upload_certificate.pem
