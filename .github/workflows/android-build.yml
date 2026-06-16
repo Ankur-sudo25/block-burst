@@ -32,6 +32,9 @@ jobs:
         distribution: 'zulu'
         java-version: '21'
 
+    - name: Generate Release Keystore
+      run: keytool -genkeypair -v -keystore android/block-burst-release.keystore -alias block-burst -keyalg RSA -keysize 2048 -validity 10000 -storepass BlockBurst2026 -keypass BlockBurst2026 -dname "CN=Block Burst, OU=Dev, O=DevLance, L=India, ST=India, C=IN"
+
     - name: Make gradlew executable
       run: chmod +x ./android/gradlew
 
@@ -39,7 +42,7 @@ jobs:
       working-directory: ./android
       run: ./gradlew assembleDebug
 
-    - name: Build Release AAB (Unsigned)
+    - name: Build Release AAB (Signed)
       working-directory: ./android
       run: ./gradlew bundleRelease
 
