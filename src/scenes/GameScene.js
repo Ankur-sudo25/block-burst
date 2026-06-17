@@ -59,6 +59,7 @@ export class GameScene extends Phaser.Scene {
 
     this.input.enabled = true;
 
+    AdManager.resetAdCounters();
     AdManager.initialize().then(() => { AdManager.showBanner(); });
   }
 

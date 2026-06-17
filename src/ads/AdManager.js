@@ -227,9 +227,13 @@ export const AdManager = {
     });
   },
 
+  resetAdCounters() {
+    this._interstitialRetryCount = 0;
+    this._bannerRetryCount = 0;
+  },
+
   async prepareInterstitial() {
     if (!admobInitialized) return;
-    this._interstitialRetryCount = 0; // Reset retry count so it always tries again
 
     try {
       console.log('[AdManager] Preparing interstitial...');
@@ -285,7 +289,6 @@ export const AdManager = {
   },
 
   async showBanner() {
-    this._bannerRetryCount = 0; // Reset retry count whenever requested
     if (bannerShowing) return;
 
     if (!this._isNativePlatform()) {

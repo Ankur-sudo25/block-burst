@@ -14,6 +14,7 @@ export class MenuScene extends Phaser.Scene {
     const W = GAME_WIDTH;
     const H = GAME_HEIGHT;
 
+    AdManager.resetAdCounters();
     AdManager.initialize().then(() => { AdManager.showBanner(); });
 
     // STATE: Init
